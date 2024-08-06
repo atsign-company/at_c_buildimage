@@ -22,7 +22,12 @@ jobs:
     steps:
       # Extract version for docker tag
       - name: Get version
-        run: echo "VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+        run: |
+          if [ -z "${{ github.event.inputs.cmake-version }}" ]; then
+            echo "CMAKE_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          else
+            echo "CMAKE_VERSION=${{ github.event.inputs.cmake-version }}" >> $GITHUB_ENV
+          fi
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@49b3bc8e6bdd4a60e6116a5414239cba5943d3cf # v3.2.0
@@ -41,13 +46,13 @@ jobs:
         uses: docker/build-push-action@5176d81f87c23d6fc96624dfdbcd9f3830bbe445 # v6.5.0
         with:
           file: ./Dockerfile
-          build-args: CMAKE_VERSION=${{ github.event.inputs.cmake-version }}
+          build-args: CMAKE_VERSION=$${{ env.CMAKE_VERSION }}
           push: true
           provenance: true
           tags: |
             atsigncompany/cbuildimage:latest
             atsigncompany/cbuildimage:GHA_${{ github.run_number }}
-            atsigncompany/cbuildimage:CMake-${{ env.VERSION }}
+            atsigncompany/cbuildimage:CMake-${{ env.CMAKE_VERSION }}
           platforms: |
             linux/amd64
             linux/arm64/v8
