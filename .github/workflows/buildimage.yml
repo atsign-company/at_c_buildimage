@@ -34,10 +34,24 @@ jobs:
           file: ./Dockerfile
           build-args: CMAKE_VERSION=${{ github.event.inputs.cmake-version }}
           push: true
-          provenance: false
+          provenance: true
           tags: |
             atsigncompany/cbuildimage:latest
             atsigncompany/cbuildimage:GHA_${{ github.run_number }}
           platforms: |
             linux/amd64
             linux/arm64/v8
+
+  slsa_provenance:
+    needs: [build_multi_arch_images]
+    permissions:
+      actions: read # for detecting the Github Actions environment.
+      id-token: write # for creating OIDC tokens for signing.
+      packages: write # for uploading attestations.
+    uses: slsa-framework/slsa-github-generator/.github/workflows/generator_container_slsa3.yml@v2.0.0
+    with:
+      image: "atsigncompany/cbuildimage"
+      digest: ${{ needs.build_multi_arch_images.outputs.digest }}
+    secrets:
+      registry-username: ${{ secrets.DOCKERHUB_USERNAME }}
+      registry-password: ${{ secrets.DOCKERHUB_TOKEN }}
