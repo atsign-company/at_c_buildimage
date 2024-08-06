@@ -24,7 +24,7 @@ jobs:
       - name: Get version
         run: |
           if [ -z "${{ github.event.inputs.cmake-version }}" ]; then
-            echo "CMAKE_VERSION=${GITHUB_REF##*/}" >> $GITHUB_ENV
+            echo "CMAKE_VERSION=${GITHUB_REF##*/}" | sed s/c// >> $GITHUB_ENV
           else
             echo "CMAKE_VERSION=${{ github.event.inputs.cmake-version }}" >> $GITHUB_ENV
           fi
