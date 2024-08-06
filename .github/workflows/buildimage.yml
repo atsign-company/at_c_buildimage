@@ -18,7 +18,7 @@ jobs:
   build_multi_arch_images:
     runs-on: ubuntu-latest
     outputs:
-      digest: ${{ steps.build_multi_arch_images.outputs.digest }}
+      digest: ${{ steps.docker_build.outputs.digest }}
     steps:
       # Extract version for docker tag
       - name: Get version
