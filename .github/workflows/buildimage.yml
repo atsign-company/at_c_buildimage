@@ -2,6 +2,11 @@ name: BuildImage
 
 on:
   workflow_dispatch:
+    inputs:
+      cmake-version:
+        description: 'CMake version'
+        required: true
+        default: '3.30.2'
 
 permissions:  # added using https://github.com/step-security/secure-workflows
   contents: read
@@ -27,6 +32,7 @@ jobs:
         uses: docker/build-push-action@4a13e500e55cf31b7a5d59a38ab2040ab0f42f56 # v5.1.0
         with:
           file: ./Dockerfile
+          build-args: CMAKE_VERSION=${{ github.event.inputs.cmake-version }}
           push: true
           provenance: false
           tags: |
