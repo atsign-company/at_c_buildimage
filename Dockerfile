@@ -11,9 +11,9 @@ RUN set -eux; \
   apt-get install -y --no-install-recommends clang-18; \
   cd /; \
   case "$(dpkg --print-architecture)" in \
-    amd64)   ARCH="x86_64";\
-    arm64)   ARCH="aarch64"; \
+    amd64)   ARCH="x86_64";;\
+    arm64)   ARCH="aarch64";; \
   esac; \
-  wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-$ARCH.tar.gz; \
-  tar -xvf cmake-${CMAKE_VERSION}-linux-$ARCH.tar.gz --strip-components=1 -C /usr/; \
+  wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz; \
+  tar -xvf cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz --strip-components=1 -C /usr/; \
   cmake --version
