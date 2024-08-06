@@ -46,7 +46,7 @@ jobs:
         uses: docker/build-push-action@5176d81f87c23d6fc96624dfdbcd9f3830bbe445 # v6.5.0
         with:
           file: ./Dockerfile
-          build-args: CMAKE_VERSION=$${{ env.CMAKE_VERSION }}
+          build-args: CMAKE_VERSION=${{ env.CMAKE_VERSION }}
           push: true
           provenance: true
           tags: |
