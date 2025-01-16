@@ -4,7 +4,7 @@ ARG CMAKE_VERSION=3.30.2
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates gnupg git make wget; \
+    ca-certificates gnupg git make python3 wget; \
   cat /tmp/clang-18.apt >> /etc/apt/sources.list; \
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -; \
   apt-get update; \
