@@ -4,7 +4,7 @@ ARG CMAKE_VERSION=3.30.2
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
-    ca-certificates gnupg git make python3 wget; \
+    ca-certificates gnupg git make patch python3 wget; \
   cat /tmp/clang-18.apt >> /etc/apt/sources.list; \
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -; \
   apt-get update; \
@@ -17,3 +17,4 @@ RUN set -eux; \
   wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz; \
   tar -xvf cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz --strip-components=1 -C /usr/; \
   cmake --version
+
