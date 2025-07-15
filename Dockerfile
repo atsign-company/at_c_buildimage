@@ -1,6 +1,6 @@
 FROM debian:oldstable-20250630-slim@sha256:5f8413ae7cbe44b328a7268fdc373de015fcd99930c510a99716b83984b4b4d9 AS build
 COPY clang-18.apt /tmp
-ARG CMAKE_VERSION=3.31.7
+ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
