@@ -1,6 +1,6 @@
-FROM debian:oldoldstable-20240612-slim@sha256:297126bdb5f6b3dd2ce43c87fcd67678f3b8b2ecbed94fb9f18bbccca522bcb1 AS build
+FROM debian:oldstable-20250630-slim@sha256:5f8413ae7cbe44b328a7268fdc373de015fcd99930c510a99716b83984b4b4d9 AS build
 COPY clang-18.apt /tmp
-ARG CMAKE_VERSION=3.30.2
+ARG CMAKE_VERSION=3.31.7
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
@@ -17,4 +17,3 @@ RUN set -eux; \
   wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz; \
   tar -xvf cmake-${CMAKE_VERSION}-linux-${ARCH}.tar.gz --strip-components=1 -C /usr/; \
   cmake --version
-
