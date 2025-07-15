@@ -1,14 +1,14 @@
 FROM debian:oldstable-20250630-slim@sha256:5f8413ae7cbe44b328a7268fdc373de015fcd99930c510a99716b83984b4b4d9 AS build
-COPY clang-18.apt /tmp
+COPY clang-19.apt /tmp
 ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     ca-certificates gnupg git make patch python3 wget; \
-  cat /tmp/clang-18.apt >> /etc/apt/sources.list; \
+  cat /tmp/clang-19.apt >> /etc/apt/sources.list; \
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -; \
   apt-get update; \
-  apt-get install -y --no-install-recommends clang-18; \
+  apt-get install -y --no-install-recommends clang-19; \
   cd /; \
   case "$(dpkg --print-architecture)" in \
     amd64)   ARCH="x86_64";;\
