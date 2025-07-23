@@ -1,4 +1,4 @@
-FROM debian:oldstable-20250630-slim@sha256:5f8413ae7cbe44b328a7268fdc373de015fcd99930c510a99716b83984b4b4d9 AS build
+FROM debian:oldstable-20250721-slim@sha256:0f53c0e545b3628fcea7befab2c7d452e77fe2ae3f7194f39a76d520984d9016 AS build
 COPY clang-19.apt /tmp
 ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
