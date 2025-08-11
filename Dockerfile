@@ -5,10 +5,10 @@ COPY oldoldstable.apt /tmp
 COPY clang-19.apt /tmp
 ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
+  cat /tmp/oldoldstable.apt > /etc/apt/sources.list; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     ca-certificates gnupg git make patch python3 wget; \
-  cat /tmp/oldoldstable.apt > /etc/apt/sources.list; \
   cat /tmp/clang-19.apt >> /etc/apt/sources.list; \
   wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -; \
   apt-get update; \
