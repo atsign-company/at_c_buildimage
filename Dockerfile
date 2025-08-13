@@ -1,4 +1,4 @@
-FROM debian:oldstable-20250721-slim@sha256:0f53c0e545b3628fcea7befab2c7d452e77fe2ae3f7194f39a76d520984d9016 AS build
+FROM debian:oldstable-20250811-slim@sha256:5dbf1b5b02f8e014bd468b013a35d650d8f05e2604818db8d03efefc90220761 AS build
 # 20250811 patch sources.list to use oldoldstable whilst we await Debian
 # image updates in DockerHub
 COPY oldoldstable.apt /tmp
