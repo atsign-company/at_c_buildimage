@@ -1,11 +1,7 @@
-FROM debian:oldstable-20250721-slim@sha256:0f53c0e545b3628fcea7befab2c7d452e77fe2ae3f7194f39a76d520984d9016 AS build
-# 20250811 patch sources.list to use oldoldstable whilst we await Debian
-# image updates in DockerHub
-COPY oldoldstable.apt /tmp
+FROM debian:bullseye-20250811-slim@sha256:849d9d34d5fe0bf88b5fb3d09eb9684909ac4210488b52f4f7bbe683eedcb851 AS build
 COPY clang-19.apt /tmp
 ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
-  cat /tmp/oldoldstable.apt > /etc/apt/sources.list; \
   apt-get update; \
   apt-get install -y --no-install-recommends \
     ca-certificates gnupg git make patch python3 wget; \
