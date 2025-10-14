@@ -23,3 +23,15 @@ SHA=$(docker buildx imagetools inspect ${IMAGE}:CMake-${CMAKE_VERSION} \
 slsa-verifier verify-image ${IMAGE}@${SHA} --source-uri \
   github.com/atsign-company/at_c_buildimage --source-tag c${CMAKE_VERSION}
 ```
+
+## Docker image signing
+
+The Docker images created from this repo are signed during the build process
+so that you can verify their authenticity using
+[cosign](https://github.com/sigstore/cosign):
+
+```sh
+cosign verify atsigncompany/cbuildimage:latest \
+--certificate-oidc-issuer=https://token.actions.githubusercontent.com \
+--certificate-identity-regexp='^https://github.com/atsign-company/at_c_buildimage/.+'
+```
