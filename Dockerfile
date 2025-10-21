@@ -1,4 +1,4 @@
-FROM debian:bullseye-20250929-slim@sha256:f807f4b16002c623115b0247dca6a55711c6b1ae821dc64fb8a2339e4ce2115d AS build
+FROM debian:bullseye-20251020-slim@sha256:52927eff8153b563244f98cdc802ba97918afcdf67f9e4867cbf1f7afb3d147b AS build
 COPY clang-19.apt /tmp
 ARG CMAKE_VERSION=3.31.8
 RUN set -eux; \
